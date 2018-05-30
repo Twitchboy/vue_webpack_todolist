@@ -21,12 +21,22 @@ const config = {
                 test: /\.vue$/,
                 use: 'vue-loader'
             },
+            {
+                test: /\.js?$/,
+                use: 'babel-loader'
+            },
             // 处理 css,让js 可以识别css
             {
                 test: /\.styl$/,
                 use: [
                     'style-loader',
                     'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
+                        }
+                    },
                     'stylus-loader'
                 ]
             },
@@ -55,8 +65,11 @@ const config = {
         }),
         // 引入vue-loader插件
         new VueLoaderPlugin(),
-
-        new HtmlWebpackPlugin()
+        // 生成 html 入口文件
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.join(__dirname, './src/assets/index.template.html')
+        })
     ],
     resolve: {
         extensions: ['.vue', '.js', '.css','.styl']
