@@ -23,26 +23,40 @@ const config = {
                 use: 'vue-loader'
             },
             {
-                test: /\.js?$/,
+                test: /\.jsx?$/,
                 use: 'babel-loader'
             },
             // 处理 css,让js 可以识别css
+            // {
+            //     test: /\.styl$/,
+            //     // 因为这个插件需要干涉模块转换的内容，所以需要使用它对应的 loader
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: 'style-loader',
+            //         use: [
+            //             'css-loader',
+            //             {
+            //                 loader: 'postcss-loader',
+            //                 options: {
+            //                     sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
+            //                 }
+            //             },
+            //             'stylus-loader'
+            //         ]
+            //     })
+            // },
             {
-                test: /\.styl$/,
-                // 因为这个插件需要干涉模块转换的内容，所以需要使用它对应的 loader
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        'css-loader',
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
-                            }
-                        },
-                        'stylus-loader'
-                    ]
-                })
+                test: /\.styl/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    'stylus-loader'
+                ]
             },
             // 处理图片
             {
@@ -70,7 +84,7 @@ const config = {
         // 引入vue-loader插件
         new VueLoaderPlugin(),
         // 分离css形成单独的文件
-        new ExtractTextPlugin('[name].[hash].css'),
+        // new ExtractTextPlugin('[name].[hash].css'),
         // 生成 html 入口文件
         new HtmlWebpackPlugin({
             filename: 'index.html',
