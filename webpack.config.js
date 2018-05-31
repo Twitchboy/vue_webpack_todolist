@@ -2,17 +2,18 @@ const webpack = require('webpack');
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin"); // webpack 4.x,需要指定此插件的版本；不然会报错
 
 const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
     target: 'web',
     entry: {
-        app: path.join(__dirname, './src/index.js')
+        app: path.resolve(__dirname, './src/index.js')
     },
     output: {
         filename: '[name].[hash].js',
-        path: path.join(__dirname, './dist')
+        path: path.resolve(__dirname, './dist')
     },
     module: {
         rules: [
@@ -28,17 +29,20 @@ const config = {
             // 处理 css,让js 可以识别css
             {
                 test: /\.styl$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
-                        }
-                    },
-                    'stylus-loader'
-                ]
+                // 因为这个插件需要干涉模块转换的内容，所以需要使用它对应的 loader
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
+                            }
+                        },
+                        'stylus-loader'
+                    ]
+                })
             },
             // 处理图片
             {
@@ -65,14 +69,20 @@ const config = {
         }),
         // 引入vue-loader插件
         new VueLoaderPlugin(),
+        // 分离css形成单独的文件
+        new ExtractTextPlugin('[name].[hash].css'),
         // 生成 html 入口文件
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: path.join(__dirname, './src/assets/index.template.html')
+            template: path.resolve(__dirname, './src/assets/index.template.html')
         })
     ],
     resolve: {
-        extensions: ['.vue', '.js', '.css','.styl']
+        extensions: ['.vue', '.js', '.css','.styl'],
+
+        modules: [
+            path.resolve(__dirname, 'node_modules'), // 指定当前目录下的 node_modules 优先查找
+        ]
     }
 }
 
