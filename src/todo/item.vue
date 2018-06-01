@@ -13,14 +13,16 @@
 <script>
 	export default{
 		props:{
-			todo:{
-				type:Object,
+			todo: {
+				type: Object,
 				required:true
 			}
 		},
 		methods:{
+            // 删除选择的todo
 			deleteTodo(){
-				this.$emit('del',this.todo.id)
+                // 监听父组件 del事件
+				this.$emit('del', this.todo.id)
 			}
 		}
 	}

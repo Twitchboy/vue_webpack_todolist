@@ -7,30 +7,69 @@
             placeholder="What are you doing?"
             @keyup.enter="addTodo"
         >
-        <Item :todo="todo"></Item>
+        <Item
+            v-for="todo in filteredTodos"
+            :key="todo.id"
+            :todo="todo"
+            @del="deleteTodo"
+        ></Item>
+        <Tabs
+            :filter="filter"
+            :todos="todos"
+            @toggle="changeTab"
+            @clearAll="clearAllCompleted"
+        ></Tabs>
     </section>
 </template>
 
 <script>
 import Item from './item';
+import Tabs from './tabs';
 
 export default {
     components: {
         Item,
+        Tabs
     },
     data () {
         return {
+            // todo 容器
             todos: [],
-            todo: {
-                id: 0,
-                content: '你在做什么？',
-                completed: false
-            }
+            filter: 'all',
+            todoId: 0
         };
     },
+    computed: {
+        // 显示不同状态的任务
+        filteredTodos () {
+            if (this.filter === 'all') return this.todos;
+
+            // 判断是否完成
+            const completed = this.filter === 'completed';
+            return this.todos.filter(todo => todo.completed === completed);
+        }
+    },
     methods: {
-        addTodo () {
-            console.log('add todo thing')
+        addTodo (e) {
+            if (e.target.value.trim().length === 0) return;
+            // 新增任务都放在第一位
+            this.todos.unshift({
+                id: this.todoId++,
+                content: e.target.value.trim(),
+                completed: false
+            });
+            e.target.value = '';
+            console.log(this.todos);
+        },
+        deleteTodo (id) {
+            this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1);
+        },
+        // 更换 tab
+        changeTab (state) {
+            this.filter = state;
+        },
+        clearAllCompleted () {
+            this.todos = this.todos.filter(todo => !todo.completed);
         }
     }
 }

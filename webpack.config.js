@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const { VueLoaderPlugin } = require('vue-loader');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin"); // webpack 4.x,需要指定此插件的版本；不然会报错
 
@@ -12,7 +12,7 @@ const config = {
         app: path.resolve(__dirname, './src/index.js')
     },
     output: {
-        filename: '[name].[hash].js',
+        filename: '[name].[hash:8].js',
         path: path.resolve(__dirname, './dist')
     },
     module: {
@@ -27,37 +27,37 @@ const config = {
                 use: 'babel-loader'
             },
             // 处理 css,让js 可以识别css
-            // {
-            //     test: /\.styl$/,
-            //     // 因为这个插件需要干涉模块转换的内容，所以需要使用它对应的 loader
-            //     use: ExtractTextPlugin.extract({
-            //         fallback: 'style-loader',
-            //         use: [
-            //             'css-loader',
-            //             {
-            //                 loader: 'postcss-loader',
-            //                 options: {
-            //                     sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
-            //                 }
-            //             },
-            //             'stylus-loader'
-            //         ]
-            //     })
-            // },
             {
-                test: /\.styl/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    },
-                    'stylus-loader'
-                ]
+                test: /\.styl(us)?$/,
+                // 因为这个插件需要干涉模块转换的内容，所以需要使用它对应的 loader
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
+                            }
+                        },
+                        'stylus-loader'
+                    ]
+                })
             },
+            // {
+            //     test: /\.styl/,
+            //     use: [
+            //         'style-loader',
+            //         'css-loader',
+            //         {
+            //             loader: 'postcss-loader',
+            //             options: {
+            //                 sourceMap: true
+            //             }
+            //         },
+            //         'stylus-loader'
+            //     ]
+            // },
             // 处理图片
             {
                 test: /\.(gif|jpg|jpeg|png|svg)$/,
@@ -84,7 +84,7 @@ const config = {
         // 引入vue-loader插件
         new VueLoaderPlugin(),
         // 分离css形成单独的文件
-        // new ExtractTextPlugin('[name].[hash].css'),
+        new ExtractTextPlugin('[name].css'),
         // 生成 html 入口文件
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -101,7 +101,8 @@ const config = {
 }
 
 if (isDev) {
-    config.devtool = "#cheap-module-eval-source-map"; // 代码与编译代码，浏览器调试，定位错误；映射
+    // 代码与编译代码，浏览器调试，定位错误；映射
+    config.devtool = "#cheap-module-eval-source-map";
 
     config.devServer = {
         port: 8000, // 端口
