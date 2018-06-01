@@ -7,12 +7,14 @@
             placeholder="What are you doing?"
             @keyup.enter="addTodo"
         >
-        <Item
-            v-for="todo in filteredTodos"
-            :key="todo.id"
-            :todo="todo"
-            @del="deleteTodo"
-        ></Item>
+        <div class="item-box">
+            <Item
+                v-for="todo in filteredTodos"
+                :key="todo.id"
+                :todo="todo"
+                @del="deleteTodo"
+            ></Item>
+        </div>
         <Tabs
             :filter="filter"
             :todos="todos"
@@ -99,6 +101,11 @@ export default {
             padding: 16px 16px 16px 60px;
             border: none;
             box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+        }
+        .item-box {
+            max-height 600px
+            overflow hidden
+            overflow-y:scroll;
         }
     }
 

@@ -29,6 +29,7 @@ const config = {
             // 处理 css,让js 可以识别css
             {
                 test: /\.styl(us)?$/,
+                // 这块只需要在上生产的时候做就可以了，所以到时候再进行配置下
                 // 因为这个插件需要干涉模块转换的内容，所以需要使用它对应的 loader
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
@@ -44,20 +45,6 @@ const config = {
                     ]
                 })
             },
-            // {
-            //     test: /\.styl/,
-            //     use: [
-            //         'style-loader',
-            //         'css-loader',
-            //         {
-            //             loader: 'postcss-loader',
-            //             options: {
-            //                 sourceMap: true
-            //             }
-            //         },
-            //         'stylus-loader'
-            //     ]
-            // },
             // 处理图片
             {
                 test: /\.(gif|jpg|jpeg|png|svg)$/,
@@ -121,6 +108,20 @@ if (isDev) {
         new webpack.NoEmitOnErrorsPlugin()  // 编译出现错误时，使用 NoEmitOnErrorsPlugin 来跳过输出阶段
     )
 
+} else {
+    config.optimization = {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {   // 抽离第三方插件
+                    test: /node_modules/,   // 指定是node_modules下的第三方包
+                    chunks: 'initial',
+                    name: 'vendor',  // 打包后的文件名，任意命名
+                    // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
+                    priority: 10
+                }
+            }
+        }
+    };
 }
 
 module.exports = config;
