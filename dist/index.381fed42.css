@@ -1,22 +1,4 @@
 
-#app[data-v-56ed54ff] {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-#app .cover[data-v-56ed54ff] {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: #999;
-  opacity: 0.9;
-  z-index: 1;
-}
-
 .main-header[data-v-300c78f6] {
   text-align: center;
 }
@@ -27,48 +9,14 @@
   margin: 20px;
 }
 
-.helper[data-v-0a398542] {
-  font-weight: 100;
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
-  line-height: 30px;
-  background-color: #fff;
-  font-size: 14px;
-  font-smoothing: antialiased;
+#footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #bfbfbf;
+  font-size: 20px;
+  text-shadow: 0 1px 0 #bfbfbf;
 }
-.left[data-v-0a398542],
-.clear[data-v-0a398542],
-.tabs[data-v-0a398542] {
-  padding: 0px 10px;
-  box-sizing: border-box;
-}
-.left[data-v-0a398542],
-.clear[data-v-0a398542] {
-  width: 150px;
-}
-.left[data-v-0a398542] {
-  text-align: left;
-}
-.clear[data-v-0a398542] {
-  text-align: right;
-  cursor: pointer;
-}
-.tabs[data-v-0a398542] {
-  width: 200px;
-  display: flex;
-  justify-content: space-around;
-}
-.tabs *[data-v-0a398542] {
-  display: inline-block;
-  padding: 0px 10px;
-  cursor: pointer;
-  border: 1px solid rgba(175,47,47,0);
-}
-.tabs *.actived[data-v-0a398542] {
-  border-color: rgba(175,47,47,0.4);
-  border-radius: 5px;
-}
+
 
 .todo-item[data-v-5647e08e] {
   position: relative;
@@ -132,13 +80,51 @@
   cursor: pointer;
   outline: none;
 }
-#footer {
-  margin-top: 40px;
-  text-align: center;
-  color: #bfbfbf;
-  font-size: 20px;
-  text-shadow: 0 1px 0 #bfbfbf;
+
+
+.helper[data-v-0a398542] {
+  font-weight: 100;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  line-height: 30px;
+  background-color: #fff;
+  font-size: 14px;
+  font-smoothing: antialiased;
 }
+.left[data-v-0a398542],
+.clear[data-v-0a398542],
+.tabs[data-v-0a398542] {
+  padding: 0px 10px;
+  box-sizing: border-box;
+}
+.left[data-v-0a398542],
+.clear[data-v-0a398542] {
+  width: 150px;
+}
+.left[data-v-0a398542] {
+  text-align: left;
+}
+.clear[data-v-0a398542] {
+  text-align: right;
+  cursor: pointer;
+}
+.tabs[data-v-0a398542] {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+}
+.tabs *[data-v-0a398542] {
+  display: inline-block;
+  padding: 0px 10px;
+  cursor: pointer;
+  border: 1px solid rgba(175,47,47,0);
+}
+.tabs *.actived[data-v-0a398542] {
+  border-color: rgba(175,47,47,0.4);
+  border-radius: 5px;
+}
+
 
 .todo-app[data-v-61a9a8fc] {
   width: 600px;
@@ -170,6 +156,26 @@
   overflow: hidden;
   overflow-y: scroll;
 }
+
+
+#app[data-v-56ed54ff] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+#app .cover[data-v-56ed54ff] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #999;
+  opacity: 0.9;
+  z-index: 1;
+}
+
 html,
 body {
   margin: 0;
@@ -188,3 +194,4 @@ body {
   font-family: 'PingFang SC';
   overflow: hidden;
 }
+

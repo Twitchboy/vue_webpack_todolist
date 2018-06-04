@@ -9,7 +9,8 @@ module.exports = {
             {
                 test: /\.styl(us)?$/,
                 use: [
-                    'style-loader',
+                    // vue 开发，使用 vue-style-loader，修改样式才会有热更新的效果
+                    'vue-style-loader',
                     'css-loader',
                     {
                         loader: 'postcss-loader',
