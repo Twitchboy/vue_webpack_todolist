@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import Header from './todo/header';
-import Todo from './todo/todo';
-import Footer from './todo/footer.jsx';
+import Header from './layout/header';
+import Footer from './layout/footer';
+import Todo from './views/todo/todo';
 
 export default {
     components: {

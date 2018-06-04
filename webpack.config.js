@@ -3,9 +3,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin"); // webpack 4.x,需要指定此插件的版本；不然会报错
 const glob = require('glob');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const _mode = process.env.NODE_ENV || 'development';
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
@@ -71,7 +70,7 @@ let basicConfig = {
         })
     ],
     resolve: {
-        extensions: ['.vue', '.js', '.css','.styl'],
+        extensions: ['.vue', '.jsx', '.js', '.css','.styl'],
 
         modules: [
             path.resolve(__dirname, 'node_modules'), // 指定当前目录下的 node_modules 优先查找
