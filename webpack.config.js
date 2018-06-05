@@ -10,6 +10,9 @@ const _mode = process.env.NODE_ENV || 'development';
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const entry_files = glob.sync('./src/*.entry.js'); // 单、多入口处理
 
+// vue-loader options
+// const createVueLoaderOptions = require('./config/vue-loader.config');
+
 let _entry = {};
 for (let item of entry_files) {
     const reg = /.+\/([a-zA-Z]+)(\.entry\.js)$/g; // 匹配符合的 entry 文件，entry 可能是多个，多路口
@@ -31,7 +34,8 @@ let basicConfig = {
             // 处理 vue 模板
             {
                 test: /\.vue$/,
-                use: 'vue-loader'
+                use: 'vue-loader',
+                // options: createVueLoaderOptions(_mode)
             },
             {
                 test: /\.jsx?$/,

@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 // webpack 4.x,需要指定此插件的版本,不然会报错; 弃用
 // const ExtractTextPlugin = require("extract-text-webpack-plugin");
-// webpack 4.x 版本，提取CSS
+// webpack 4.x 版本，提取CSS；vue 推荐
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -25,6 +25,7 @@ module.exports = {
                 //         'stylus-loader'
                 //     ]
                 // })
+                // MiniCssExtractPlugin 插件
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -41,7 +42,7 @@ module.exports = {
     },
     plugins: [
         // 分离css形成单独的文件
-        // new ExtractTextPlugin('[name].css'),
+        // new ExtractTextPlugin('[name].[chunkHash:8].css'),
         new MiniCssExtractPlugin({
             filename: '[name].[chunkHash:8].css'
         })
