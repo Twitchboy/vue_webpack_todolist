@@ -1,4 +1,4 @@
-<style lang="stylus" scoped>
+<style lang="stylus" module>
 .main-header {
     text-align center
     h1 {
@@ -11,7 +11,7 @@
 </style>
 
 <template>
-    <header class="main-header">
+    <header :class="$style.mainHeader">
         <h1>ToDoList</h1>
     </header>
 </template>

@@ -8,18 +8,63 @@ module.exports = {
             // 处理 css,让js 可以识别css
             {
                 test: /\.styl(us)?$/,
-                use: [
-                    // vue 开发，使用 vue-style-loader，修改样式才会有热更新的效果
-                    'vue-style-loader',
-                    'css-loader',
+                oneOf: [
+                    // 这里匹配 `<style module>`
                     {
-                        loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
-                        }
+                        resourceQuery: /module/,
+                        use: [
+                            'vue-style-loader',
+                            {
+                                loader: 'css-loader',
+                                    options: {
+                                    modules: true,
+                                    camelCase: true,
+                                    localIdentName: '[name]_[hash:base64:5]'
+                                }
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
+                                }
+                            },
+                            'stylus-loader'
+                        ]
                     },
-                    'stylus-loader'
-                ]
+                    // 这里匹配普通的 `<style>` 或 `<style scoped>`
+                    {
+                        use: [
+                            'vue-style-loader',
+                            'css-loader',
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
+                                }
+                            },
+                            'stylus-loader'
+                        ]
+                    }
+                ],
+                // use: [
+                //     // vue 开发，使用 vue-style-loader，修改样式才会有热更新的效果
+                //     'vue-style-loader',
+                //     {
+                //         loader: 'css-loader',
+                //         options: {
+                //             modules: true,
+                //             localIdentName: '[local]-[hash:base64:5]',
+                //             importLoaders: 2
+                //         }
+                //     },
+                //     {
+                //         loader: 'postcss-loader',
+                //         options: {
+                //             sourceMap: true // 根据stylus-loader 生成的 sourceMap 继续编译，加快处理速度
+                //         }
+                //     },
+                //     'stylus-loader'
+                // ]
             }
         ]
     },

@@ -105,7 +105,7 @@ export default {
         .item-box {
             max-height 600px
             overflow hidden
-            overflow-y:scroll;
+            overflow-y scroll;
         }
     }
 
