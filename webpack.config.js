@@ -92,7 +92,7 @@ let basicConfig = {
     splitChunks: {
       chunks: 'all'
     },
-    runtimeChunk: true
+    runtimeChunk: true // 运行时，非 entry指定的代码，把runtime相关的代码打包到 runtime 文件里
   }
 }
 
