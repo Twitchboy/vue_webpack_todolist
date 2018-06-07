@@ -17,45 +17,45 @@
 
 <script>
 export default {
-    props: {
-        filter: {
-            type: String,
-            required: true
-        },
-        todos: {
-            type: Array,
-            required: true
-        }
+  props: {
+    filter: {
+      type: String,
+      required: true
     },
-    data () {
-        return {
-            // 对照表 => ['所有', '进行中', '已完成']
-            states: ['all', 'active', 'completed']
-        }
+    todos: {
+      type: Array,
+      required: true
+    }
+  },
+  data () {
+    return {
+      // 对照表 => ['所有', '进行中', '已完成']
+      states: ['all', 'active', 'completed']
+    }
+  },
+  filters: {
+    statesMap: (state) => {
+      // 对照表 => ['所有', '进行中', '已完成']
+      return state === 'all' ? '所有' : state === 'active' ? '进行中' : '已完成'
+    }
+  },
+  computed: {
+    // 过滤出未完成任务数
+    unFinishToDoLength () {
+      return this.todos.filter(todo => !todo.completed).length
+    }
+  },
+  methods: {
+    // 切换 tab
+    toggleFilter (state) {
+      console.log(state)
+      this.$emit('toggle', state)
     },
-    filters: {
-        statesMap: (state) => {
-            // 对照表 => ['所有', '进行中', '已完成']
-            return state === 'all' ? '所有' : state === 'active' ? '进行中' : '已完成';
-        }
-    },
-    computed: {
-        // 过滤出未完成任务数
-        unFinishToDoLength () {
-            return this.todos.filter(todo => !todo.completed).length;
-        }
-    },
-    methods: {
-        // 切换 tab
-        toggleFilter (state) {
-            console.log(state);
-            this.$emit('toggle', state);
-        },
-        clearAllCompleted () {
-            this.$emit('clearAll')
-        }
-    },
-    created () {}
+    clearAllCompleted () {
+      this.$emit('clearAll')
+    }
+  },
+  created () {}
 }
 </script>
 

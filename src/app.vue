@@ -27,20 +27,20 @@
 </template>
 
 <script>
-import Header from './layout/header';
-import Footer from './layout/footer';
-import Todo from './views/todo/todo';
+import Header from './layout/header'
+import Footer from './layout/footer'
+import Todo from './views/todo/todo'
 
 export default {
-    components: {
-        Header,
-        Todo,
-        Footer
-    },
-    data () {
-        return {
-            text: 'vue start!!!'
-        };
+  components: {
+    Header,
+    Todo,
+    Footer
+  },
+  data () {
+    return {
+      text: 'vue start!!!'
     }
+  }
 }
 </script>
