@@ -23,6 +23,7 @@ for (let item of entryFiles) {
 }
 
 let basicConfig = {
+  mode: process.env.NODE_ENV || 'development',
   target: 'web',
   entry: _entry,
   output: {
@@ -85,6 +86,13 @@ let basicConfig = {
     modules: [
       path.resolve(__dirname, 'node_modules') // 指定当前目录下的 node_modules 优先查找
     ]
+  },
+  // 优化
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
+    runtimeChunk: true
   }
 }
 
