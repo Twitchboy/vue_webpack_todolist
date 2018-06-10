@@ -7,9 +7,11 @@ const app = new Vue({
     text: '生命周期'
   },
   beforeCreate () {
+    // 做 ssr 时，会涉及
     console.log(this.$el, '创建前')
   },
   created () {
+    // 做 ssr 时，会涉及
     console.log(this.$el, '创建后')
   },
   beforeMount () {
@@ -29,6 +31,18 @@ const app = new Vue({
   },
   destroyed () {
     console.log(this, '销毁后')
+  },
+  render (h) {
+    console.log('render function')
+    return h('div', {}, this.text)
+  },
+  // render function 报错时 才会报错，当前组件
+  renderError (h, error) {
+    return h('div', {}, error.stack)
+  },
+  //
+  errorCaptured () {
+    // 捕获一个来自子孙组件的错误时被调用，收集错误，向上冒泡，并且正式环境可以使用
   }
 })
 
