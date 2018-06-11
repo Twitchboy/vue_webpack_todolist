@@ -1,2 +1,3 @@
 // import './instance'
-import './lifeCycle'
+// import './lifeCycle'
+import './component'
