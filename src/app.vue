@@ -20,7 +20,8 @@
     <div id="app">
         <div class="cover">
             <Header></Header>
-            <Todo></Todo>
+            <!-- <Todo></Todo> -->
+            <router-view />
             <Footer></Footer>
         </div>
     </div>

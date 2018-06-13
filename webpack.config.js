@@ -82,9 +82,6 @@ let basicConfig = {
   ],
   resolve: {
     extensions: ['.vue', '.jsx', '.js', '.css', '.styl'],
-    alias: {
-      'vue': path.resolve(__dirname, '../node_modules/vue/dist/vue.esm.js')
-    },
     modules: [
       path.resolve(__dirname, 'node_modules') // 指定当前目录下的 node_modules 优先查找
     ]
