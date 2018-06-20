@@ -7,7 +7,8 @@ export default [
     redirect: '/app'
   },
   {
-    path: '/app',
+    path: '/app', // '/app/:id' => '/app/xxx' 通过 this.$route 提取
+    // props: true, // 声明为 true 后，此组件里可以直接使用 props: ['id'] 接收参数，无需使用 this.$route 获取； 组件和路由解耦
     component: Todo,
     name: 'app', // 通过 name 方便路由跳转
     meta: {
