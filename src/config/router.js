@@ -9,8 +9,28 @@ import routes from './routes'
 
 export default () => {
   return new Router({
-    routes
-    // mode: 'history',
-    // base: '/base'
+    routes,
+    mode: 'history',
+    // base: '/base' // 默认添加的基础路径
+    // linkActiveClass: 'active-link', // 配置 <router-link> 标签类名，来各它设置全局样式
+    // linkExactActiveClass: 'exact-active-link' // 配置 <router-link> 标签类名，来各它设置全局样式
+    scrollBehavior (to, from, savedPosition) {
+      // 页面路径跳转，是否需要滚动
+      // to 路由跳转到那个路由
+      // from 从那个路由跳转过来
+      // 从 /app 跳转到 /login,  to => /login  from => /app 返回的是一个路由对象
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        return {x: 0, y: 0}
+      }
+    }
+    // 当浏览器不支持 history.pushState 控制路由是否应该回退到 hash 模式。默认值为 true。
+    // fallback: true
+    // query 指的是 url ? 号以后的参数; 下面两种方法让我嫩可以定制返回 query 的数据结构
+    // parseQuery (query) { // query: string
+    // },
+    // // url ? 号以后的参数
+    // stringifyQuery (obj) {}
   })
 }

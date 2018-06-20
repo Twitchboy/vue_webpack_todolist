@@ -74,7 +74,12 @@ module.exports = {
     overlay: { // webpack 编译过程中出现错误都显示再网页上
       errors: true
     },
-    // historyFallback: {}, // 访问地址不识别的时候，映射到 index
+    // historyApiFallback: {}, // 访问地址不识别的时候，映射到 index
+    // 配置路由 mode = history 时候使用;
+    // 指定文件的路径就是 output 输出路径，如果 output 设置了 publicPath: '/public/', 这里 historyApiFallback 也要设置下 为 index: '/public/index.html'
+    historyApiFallback: {
+      index: '/index.html'
+    },
     open: true, // 打开浏览器窗口
     hot: true // 热更新， 组件修改，只更新组件
   },
