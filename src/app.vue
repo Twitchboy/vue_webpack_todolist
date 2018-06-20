@@ -20,8 +20,12 @@
     <div id="app">
         <div class="cover">
             <Header></Header>
+            <router-link :to="{name: 'app'}">app</router-link>
+            <router-link to="/login">login</router-link>
             <!-- <Todo></Todo> -->
-            <router-view />
+            <transition name="fade"> <!-- 定义过渡动画 -->
+              <router-view />
+            </transition>
             <Footer></Footer>
         </div>
     </div>
