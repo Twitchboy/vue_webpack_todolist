@@ -10,6 +10,10 @@ export default [
     path: '/app', // '/app/:id' => '/app/xxx' 通过 this.$route 提取
     // props: true, // 声明为 true 后，此组件里可以直接使用 props: ['id'] 接收参数，无需使用 this.$route 获取； 组件和路由解耦
     component: Todo,
+    // components: {
+    //   default: Todo,
+    //   a: Login
+    // },
     name: 'app', // 通过 name 方便路由跳转
     meta: {
       // 保存路由的一些信息，元信息
@@ -26,5 +30,9 @@ export default [
   {
     path: '/login',
     component: Login
+    // components: {
+    //   default: Login,
+    //   a: Todo
+    // }
   }
 ]
