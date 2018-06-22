@@ -1,4 +1,4 @@
-import Todo from '../views/todo/todo.vue'
+// import Todo from '../views/todo/todo.vue'
 import Login from '../views/login/login.vue'
 
 export default [
@@ -9,7 +9,7 @@ export default [
   {
     path: '/app', // '/app/:id' => '/app/xxx' 通过 this.$route 提取
     // props: true, // 声明为 true 后，此组件里可以直接使用 props: ['id'] 接收参数，无需使用 this.$route 获取； 组件和路由解耦
-    component: Todo,
+    component: () => import('../views/todo/todo.vue'), // 懒加载，动态加载
     // components: {
     //   default: Todo,
     //   a: Login
