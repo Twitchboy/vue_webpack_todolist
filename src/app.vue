@@ -35,12 +35,12 @@
 <script>
 import Header from './layout/header'
 import Footer from './layout/footer'
-import Todo from './views/todo/todo'
+// import Todo from './views/todo/todo'
 
 export default {
   components: {
     Header,
-    Todo,
+    // Todo, // 添加路由后，就不需要使用这个了，使用懒加载后，注释这里
     Footer
   },
   data () {
