@@ -43,6 +43,10 @@ export default {
     // Todo, // 添加路由后，就不需要使用这个了，使用懒加载后，注释这里
     Footer
   },
+  mounted () {
+    let fullName = this.$store.getters.fullName
+    console.log(fullName)
+  },
   data () {
     return {
       text: 'vue start!!!'
