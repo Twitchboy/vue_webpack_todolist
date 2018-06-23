@@ -1,10 +1,10 @@
 {
     "presets": [
-        "env",
-        "stage-1"
+        "env"
     ],
     "plugins": [
         "transform-vue-jsx",
-        "syntax-dynamic-import"
+        "syntax-dynamic-import",
+        "syntax-object-rest-spread"
     ]
 }
