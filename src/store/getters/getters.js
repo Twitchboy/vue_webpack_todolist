@@ -6,5 +6,11 @@
 export default {
   fullName (state) {
     return `${state.firstName} ${state.lastName}`
+  },
+  test: (state, fetters) => {
+    return fetters.fullName + ' 次数：' + state.count
+  },
+  testMethod: state => id => {
+    return id
   }
 }

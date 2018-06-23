@@ -20,6 +20,9 @@
     <div id="app">
         <div class="cover">
             <Header></Header>
+            <p>{{count}}</p>
+            <p>{{test}}</p>
+            <p>{{test2(2)}}</p>
             <router-link :to="{name: 'app'}">app</router-link>
             <router-link to="/login">login</router-link>
             <!-- <Todo></Todo> -->
@@ -36,12 +39,22 @@
 import Header from './layout/header'
 import Footer from './layout/footer'
 // import Todo from './views/todo/todo'
+import {mapState, mapGetters} from 'vuex'
 
 export default {
   components: {
     Header,
     // Todo, // 添加路由后，就不需要使用这个了，使用懒加载后，注释这里
     Footer
+  },
+  computed: {
+    ...mapState([
+      'count'
+    ]),
+    ...mapGetters({
+      test: 'test',
+      test2: 'testMethod'
+    })
   },
   mounted () {
     let fullName = this.$store.getters.fullName
